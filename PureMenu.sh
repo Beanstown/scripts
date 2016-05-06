@@ -19,7 +19,6 @@ OUTDIR=~/Android/Completed
 PURELAYERS=~/Android/aosp/purenexus
 PURECMTE=~/Android/aosp/purenexuscmte
 FTPSERVER=uploads.androidfilehost.com
-REMOTEPATH=/
 LOGIN=BeansTown106
 PASSWORD=password
 
@@ -105,11 +104,9 @@ cmte() {
 
 upload() {
   cd $OUTDIR
-  ftp -n $FTPSERVER <<INPUT_END
-  quote user $LOGIN
-  quote pass $PASSWORD
-  cd $REMOTEPATH
-  prompt off
+  lftp <<INPUT_END
+  open sftp://$FTPSERVER
+  user $LOGIN $PASSWORD
   mput *.*
   exit
 INPUT_END
