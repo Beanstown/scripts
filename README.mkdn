@@ -1,0 +1,59 @@
+Beans Custom AOSP Scripts
+=========================
+
+Build Scripts
+-------------
+
+PureMenu.sh
+
+    This script contains a menu based build system that can be edited to point to multiple repos.
+    It can Auto Upload via sftp to your host of choice right now it is setup for androidfilehost
+
+
+Multi-release.sh
+
+    This script contains a function based multi repo build system with no upload functionality
+
+
+release.sh
+
+    This script contains a function based single repo build system with no upload functionality 
+
+
+
+Crowdin Sync
+------------
+This script is used to synchronize PureNexus's translations with Crowdin's. Also, it can handle
+automatic commiting to Github and pushing/downloading to/from Crowdin.
+
+The Ruby variant of crowdin-cli & python-git is required for this to work.
+
+    \curl -sSL https://get.rvm.io | bash -s stable --ruby
+    source /home/your_username/.rvm/scripts/rvm # Add this to your .bashrc file!
+    rvm all do gem install crowdin-cli
+    sudo apt-get install python-git
+
+Export the following variables to set the API keys and the base path.
+You will also need to add your api key and base path to the crowdin.yaml file
+Base path should contain all PureNexus trees in subfolders, named after PureNexus branches:
+
+    export PURE_CROWDIN_API_KEY=your_api_key
+    export PURE_CROWDIN_BASE_PATH=your_base_path
+
+Execute:
+    ./crowdin_sync.py --username your_github_username --branch branch_name [--no-download|--no-upload]
+
+Placement
+    crowdin_sync.py needs to be in the root of your source tree as well as the crowdin folder
+
+
+Credits/Thanks
+--------------
+The contributors who worked on the crowdin script (@therbom, @MikeNG, @cybojenix, @nick0703, @Mazda--)
+
+@MrBanks - for some of the logic used in the scripts that i pulled from his dynamic gapps
+
+@Surge1223 - for his base menu layout i used in the PureMenu.sh script
+
+@NathanChance for some of the edits used in the build scripts
+
