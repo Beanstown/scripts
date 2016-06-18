@@ -17,7 +17,7 @@
 # limitations under the License.
 
 api_key: 012345678900987654321
-base_path: /home/nate/android/aosp/purenexuscmte
+base_path: /home/nate/android/aosp/PureNexusMM2
 project_identifier: the-purenexus-project
 preserve_hierarchy: true
 
@@ -91,4 +91,13 @@ files:
         vi: vi
         zu: zu
 
+  -
+    source:      '/frameworks/base/packages/SystemUI/res/values/purenexus_arrays.xml'
+    translation: '/%original_path%-%android_code%/%original_file_name%'
+    languages_mapping: *anchor
+
+  -
+    source:      '/packages/providers/DownloadProvider/res/values/purenexus_plurals.xml'
+    translation: '/%original_path%-%android_code%/%original_file_name%'
+    languages_mapping: *anchor
 
