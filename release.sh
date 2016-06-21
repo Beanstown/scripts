@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Variables
+# Variables
 OUTDIR=~/Android/Completed
 SOURCE=~/Android/aosp/purenexus
 
-#Colors
+# Colors
 green=`tput setaf 2`
 red=`tput setaf 1`
 yellow=`tput setaf 3`
@@ -33,41 +33,23 @@ echo "${yellow}Choose your Release Option..${reset}"
 echo "${yellow}To Build All devices for Release type 'release'${reset}"
 
 function release() {
-  #Prepare
+  # Prepare build environment, sync repo, and clean out directory
   BEGIN=$(date +%s)
-  cd $SOURCE
+  cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
   mka clean
-  #Angler
-  brunch angler
-  mv $SOURCE/out/target/product/angler/pure_nexus_angler-*.zip $OUTDIR
-  mka clean
-  #Bullhead
-  brunch bullhead
-  mv $SOURCE/out/target/product/bullhead/pure_nexus_bullhead-*.zip $OUTDIR
-  mka clean
-  #Deb
-  brunch deb
-  mv $SOURCE/out/target/product/deb/pure_nexus_deb-*.zip $OUTDIR
-  mka clean
-  #Flo
-  brunch flo
-  mv $SOURCE/out/target/product/flo/pure_nexus_flo-*.zip $OUTDIR
-  mka clean
-  #Flounder
-  brunch flounder
-  mv $SOURCE/out/target/product/flounder/pure_nexus_flounder-*.zip $OUTDIR
-  mka clean
-  #Hammerhead
-  brunch hammerhead
-  mv $SOURCE/out/target/product/hammerhead/pure_nexus_hammerhead-*.zip $OUTDIR
-  mka clean
-  #Shamu
-  brunch shamu
-  mv $SOURCE/out/target/product/shamu/pure_nexus_shamu-*.zip $OUTDIR
-  mka clean
-  #End
+  
+  # Build the below devices 
+  DEVICES="angler bullhead deb flo flounder hammerhead shamu"
+  for DEVICE in ${DEVICES}
+  do
+    brunch ${DEVICE}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mka clean
+  done
+  
+  # End
   END=$(date +%s)
   cd ~/
   echo "${green}All Builds Complete!!${reset}"

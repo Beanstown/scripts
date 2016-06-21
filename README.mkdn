@@ -10,11 +10,6 @@ PureMenu.sh
     It can Auto Upload via sftp to your host of choice right now it is setup for androidfilehost
 
 
-Multi-release.sh
-
-    This script contains a function based multi repo build system with no upload functionality
-
-
 release.sh
 
     This script contains a function based single repo build system with no upload functionality 
@@ -56,4 +51,7 @@ The contributors who worked on the crowdin script (@therbom, @MikeNG, @cybojenix
 @Surge1223 - for his base menu layout i used in the PureMenu.sh script
 
 @NathanChance for some of the edits used in the build scripts
+
+@George G. for getting me started with scripts and some logic in build scripts
+
 

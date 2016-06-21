@@ -14,14 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Variables
+# Variables
 OUTDIR=~/Android/Completed
 PURE=~/Android/aosp/PureNexusMM2
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password
 
-#Colors
+# Colors
 green=`tput setaf 2`
 red=`tput setaf 1`
 yellow=`tput setaf 3`
@@ -30,65 +30,47 @@ reset=`tput sgr0`
 
 #functions
 purenexus() {
-  #Prepare
-  cd $PURE
+  # Prepare build environment, sync the repo, and clean the out directory
+  cd ${PURE}
   source build/envsetup.sh
   repo sync -j8
   mka clean
-  #Angler
-  brunch angler
-  mv $PURE/out/target/product/angler/pure_nexus_angler-*.zip $OUTDIR
-  mka clean
-  #Bullhead
-  brunch bullhead
-  mv $PURE/out/target/product/bullhead/pure_nexus_bullhead-*.zip $OUTDIR
-  mka clean
-  #Deb
-  brunch deb
-  mv $PURE/out/target/product/deb/pure_nexus_deb-*.zip $OUTDIR
-  mka clean
-  #Flo
-  brunch flo
-  mv $PURE/out/target/product/flo/pure_nexus_flo-*.zip $OUTDIR
-  mka clean
-  #Flounder
-  brunch flounder
-  mv $PURE/out/target/product/flounder/pure_nexus_flounder-*.zip $OUTDIR
-  mka clean
-  #Hammerhead
-  brunch hammerhead
-  mv $PURE/out/target/product/hammerhead/pure_nexus_hammerhead-*.zip $OUTDIR
-  mka clean
-  #Shamu
-  brunch shamu
-  mv $PURE/out/target/product/shamu/pure_nexus_shamu-*.zip $OUTDIR
-  mka clean
+  
+  # Build the below devices 
+  DEVICES="angler bullhead deb flo flounder hammerhead shamu"
+  for DEVICE in ${DEVICES}
+  do
+    brunch ${DEVICE}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mka clean
+  done
 }
 
 upload() {
-  cd $OUTDIR
+  cd ${OUTDIR}
   lftp <<INPUT_END
-  open sftp://$FTPSERVER
-  user $LOGIN $PASSWORD
+  open sftp://${FTPSERVER}
+  user ${LOGIN} ${PASSWORD}
   mput *.*
   exit
 INPUT_END
 }
 
 testbuilds() {
-  #Prep
-  cd $PURE
+  # Prepare build environment, sync the repo, and clean the out directory
+  cd ${PURE}
   source build/envsetup.sh
   repo sync -j8
   mka clean
-  #Angler
-  brunch angler
-  mv $PURE/out/target/product/angler/pure_nexus_angler-*.zip $OUTDIR
-  mka clean
-  #Shamu
-  brunch shamu
-  mv $PURE/out/target/product/shamu/pure_nexus_shamu-*.zip $OUTDIR
-  mka clean
+  
+  # Build the below devices 
+  DEVICES="angler shamu"
+  for DEVICE in ${DEVICES}
+  do
+    brunch ${DEVICE}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mka clean
+  done
 }
 
 # ----------------------------------------------------------
@@ -110,51 +92,51 @@ echo ""
 echo -n "Enter selection: "
 read menu
 echo ""
-case $menu in
+case ${menu} in
 1 )
-  #Full release and upload
+  # Full release and upload
   BEGIN=$(date +%s)
   purenexus
   upload
   END=$(date +%s)
   echo "${green}Full Release and Upload Complete!!${reset}"
-  echo "${green}Total time elapsed: $(echo $(($END-$BEGIN)) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
+  echo "${green}Total time elapsed: $(echo $((${END}-${BEGIN})) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
 ;;
 #############################################################
 
 2 )
-  #Full release local
+  # Full release local
   BEGIN=$(date +%s)
   purenexus
   END=$(date +%s)
   echo "${green}Full Release Complete!!${reset}"
-  echo "${green}Total time elapsed: $(echo $(($END-$BEGIN)) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
+  echo "${green}Total time elapsed: $(echo $((${END}-${BEGIN})) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
 ;;
 #############################################################
 
 3 )
-  #Build Angler/Shamu Test Builds
+  # Build Angler/Shamu Test Builds
   BEGIN=$(date +%s)
   testbuilds
   END=$(date +%s)
   echo "${green}Test Builds Complete!!${reset}"
-  echo "${green}Total time elapsed: $(echo $(($END-$BEGIN)) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
+  echo "${green}Total time elapsed: $(echo $((${END}-${BEGIN})) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
 ;;
 #############################################################
 
 4 )
-  #Upload OUTDIR
+  # Upload OUTDIR
   BEGIN=$(date +%s)
   upload
   END=$(date +%s)
   echo "${green}OUTDIR Upload Complete!!${reset}"
-  echo "${green}Total time elapsed: $(echo $(($END-$BEGIN)) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
+  echo "${green}Total time elapsed: $(echo $((${END}-${BEGIN})) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
 ;;
 #############################################################
 
 5 )
-  #Wipe contents of OUTDIR
-  rm -rf $OUTDIR/*
+  # Wipe contents of OUTDIR
+  rm -rf ${OUTDIR}/*
   echo "${green}Wiped OUTDIR!!${reset}"
 ;;
 #############################################################
