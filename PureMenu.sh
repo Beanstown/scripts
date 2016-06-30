@@ -15,8 +15,8 @@
 # limitations under the License.
 
 # Variables
-OUTDIR=~/Android/Completed
-PURE=~/Android/aosp/PureNexusMM2
+OUTDIR=~/android/Completed
+PURE=~/android/aosp/purenexus
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password
@@ -41,7 +41,7 @@ purenexus() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${PURE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -68,7 +68,7 @@ testbuilds() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${PURE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
