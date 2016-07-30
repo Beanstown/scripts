@@ -16,7 +16,7 @@
 
 # Variables
 OUTDIR=~/android/Completed
-PURE=~/android/aosp/purenexus
+SOURCE=~/android/aosp/purenexus
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password
@@ -29,9 +29,10 @@ reset=`tput sgr0`
 
 
 #functions
-purenexus() {
+release() {
   # Prepare build environment, sync the repo, and clean the out directory
-  cd ${PURE}
+  export PURENEXUS_BUILD_TYPE=OFFICIAL
+  cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
   mka clean
@@ -41,7 +42,7 @@ purenexus() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${PURE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -49,8 +50,8 @@ purenexus() {
 upload() {
   cd ${OUTDIR}
   lftp <<INPUT_END
-  open sftp://${FTPSERVER}
-  user ${LOGIN} ${PASSWORD}
+  open sftp://$FTPSERVER
+  user $LOGIN $PASSWORD
   mput *.*
   exit
 INPUT_END
@@ -58,17 +59,18 @@ INPUT_END
 
 testbuilds() {
   # Prepare build environment, sync the repo, and clean the out directory
-  cd ${PURE}
+  export PURENEXUS_BUILD_TYPE=TEST
+  cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
   mka clean
   
   # Build the below devices 
-  DEVICES="angler shamu"
+  DEVICES="angler bullhead shamu"
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${PURE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -83,7 +85,7 @@ echo "${red}==${reset}${green}       Lets get Ready To Build For The Masses!    
 echo "${red}=========================================================${reset}"
 echo "${red}==${reset}${yellow}   1 - Full Release and Upload                       ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   2 - Full Release without Upload                   ${reset}${red}==${reset}"
-echo "${red}==${reset}${yellow}   3 - Build Shamu/Angler Test Builds                ${reset}${red}==${reset}"
+echo "${red}==${reset}${yellow}   3 - Build 5X/N6/6P Test Builds                    ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   4 - Upload all files in Out Directory             ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   5 - Delete all files in Out Directory             ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   0 - Exit                                          ${reset}${red}==${reset}"
@@ -96,7 +98,7 @@ case ${menu} in
 1 )
   # Full release and upload
   BEGIN=$(date +%s)
-  purenexus
+  release
   upload
   END=$(date +%s)
   echo "${green}Full Release and Upload Complete!!${reset}"
@@ -107,7 +109,7 @@ case ${menu} in
 2 )
   # Full release local
   BEGIN=$(date +%s)
-  purenexus
+  release
   END=$(date +%s)
   echo "${green}Full Release Complete!!${reset}"
   echo "${green}Total time elapsed: $(echo $((${END}-${BEGIN})) | awk '{print int($1/60)"mins "int($1%60)"secs "}')${reset}"
