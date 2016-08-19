@@ -17,7 +17,7 @@
 # limitations under the License.
 
 api_key: 012345678900987654321
-base_path: /home/nate/android/aosp/purenexus
+base_path: /home/nate/android/aosp/legacy
 project_identifier: the-purenexus-project
 preserve_hierarchy: true
 

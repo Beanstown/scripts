@@ -16,7 +16,7 @@
 
 # Variables
 OUTDIR=~/android/Completed
-SOURCE=~/android/aosp/purenexus
+SOURCE=~/android/aosp/legacy
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password

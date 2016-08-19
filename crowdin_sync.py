@@ -84,7 +84,7 @@ def push_as_commit(base_path, path, name, branch, username):
 
     # Push commit
     try:
-        repo.git.push('git@github.com:PureNexusProject/%s' % (name),
+        repo.git.push('git@github.com:PureNexusProject-Legacy/%s' % (name),
                       'HEAD:%s' % branch)
         print('Successfully pushed commit for %s' % name)
     except:
