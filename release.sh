@@ -15,8 +15,8 @@
 # limitations under the License.
 
 # Variables
-OUTDIR=~/Android/Completed
-SOURCE=~/Android/aosp/purenexus
+OUTDIR=~/android/Completed
+SOURCE=~/android/aosp/purenexus
 
 # Colors
 green=`tput setaf 2`
@@ -41,7 +41,7 @@ function release() {
   mka clean
   
   # Build the below devices 
-  DEVICES="angler bullhead deb flo flounder hammerhead shamu"
+  DEVICES="angler bullhead shamu"
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}

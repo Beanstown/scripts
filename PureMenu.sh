@@ -16,7 +16,7 @@
 
 # Variables
 OUTDIR=~/android/Completed
-SOURCE=~/android/aosp/legacy
+SOURCE=~/android/aosp/purenexus
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password
@@ -38,7 +38,7 @@ release() {
   mka clean
   
   # Build the below devices 
-  DEVICES="angler bullhead deb flo flounder hammerhead shamu"
+  DEVICES="angler bullhead shamu"
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}

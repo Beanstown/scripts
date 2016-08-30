@@ -1,5 +1,5 @@
-Beans Custom AOSP Scripts
-=========================
+Nates Custom Android Scripts
+============================
 
 Build Scripts
 -------------
