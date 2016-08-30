@@ -15,6 +15,13 @@ release.sh
     This script contains a function based single repo build system with no upload functionality 
 
 
+Misc Scripts
+-------------
+
+DecompileAll.sh
+
+    This apktool script decompiles all apks/jars in a given folder. useful for comparison purposes
+
 
 Crowdin Sync
 ------------
