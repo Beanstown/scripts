@@ -25,7 +25,7 @@ DecompileAll.sh
 
 Crowdin Sync
 ------------
-This script is used to synchronize PureNexus's translations with Crowdin's. Also, it can handle
+This script is used to synchronize Pure's translations with Crowdin's. Also, it can handle
 automatic commiting to Github and pushing/downloading to/from Crowdin.
 
 The Ruby variant of crowdin-cli & python-git is required for this to work.

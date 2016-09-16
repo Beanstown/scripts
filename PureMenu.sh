@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2016 BeansTown106 for PureNexusProject
+# Copyright (C) 2016 BeansTown106 for Pure Experience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 # Variables
 OUTDIR=~/android/Completed
-SOURCE=~/android/aosp/purenexus
+SOURCE=~/android/aosp/pure
 FTPSERVER=uploads.androidfilehost.com
 LOGIN=BeansTown106
 PASSWORD=password
@@ -31,7 +31,7 @@ reset=`tput sgr0`
 #functions
 release() {
   # Prepare build environment, sync the repo, and clean the out directory
-  export PURENEXUS_BUILD_TYPE=OFFICIAL
+  export PURE_BUILD_TYPE=OFFICIAL
   cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
@@ -42,7 +42,7 @@ release() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -59,7 +59,7 @@ INPUT_END
 
 testbuilds() {
   # Prepare build environment, sync the repo, and clean the out directory
-  export PURENEXUS_BUILD_TYPE=TEST
+  export PURE_BUILD_TYPE=TEST
   cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
@@ -70,7 +70,7 @@ testbuilds() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -80,7 +80,7 @@ menu=
 until [ "$menu" = "0" ]; do
 echo ""
 echo "${red}=========================================================${reset}"
-echo "${red}==${reset}${green}               PureNexus Release Script              ${reset}${red}==${reset}"
+echo "${red}==${reset}${green}                 Pure Release Script                 ${reset}${red}==${reset}"
 echo "${red}==${reset}${green}       Lets get Ready To Build For The Masses!       ${reset}${red}==${reset}"
 echo "${red}=========================================================${reset}"
 echo "${red}==${reset}${yellow}   1 - Full Release and Upload                       ${reset}${red}==${reset}"

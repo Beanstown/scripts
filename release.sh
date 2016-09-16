@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2016 BeansTown106 for PureNexusProject
+# Copyright (C) 2016 BeansTown106 for Pure Experience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 # Variables
 OUTDIR=~/android/Completed
-SOURCE=~/android/aosp/purenexus
+SOURCE=~/android/aosp/pure
 
 # Colors
 green=`tput setaf 2`
@@ -25,7 +25,7 @@ yellow=`tput setaf 3`
 reset=`tput sgr0`
 
 echo "${red}***********************************************${reset}"
-echo "${red}*${reset}${green}          PureNexus Release Script!          ${reset}${red}*${reset}"
+echo "${red}*${reset}${green}             Pure Release Script!            ${reset}${red}*${reset}"
 echo "${red}*${reset}${green}   Lets get Ready To Build For The Masses!   ${reset}${red}*${reset}"
 echo "${red}***********************************************${reset}"
 echo " "
@@ -45,7 +45,7 @@ function release() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
   

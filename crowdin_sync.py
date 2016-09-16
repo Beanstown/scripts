@@ -3,11 +3,11 @@
 # crowdin_sync.py
 #
 # Updates Crowdin source translations and pushes translations
-# directly to PureNexus Github.
+# directly to Pure Experience Project Github.
 #
 # Copyright (C) 2014-2015 The CyanogenMod Project
 # This code has been modified. Portions copyright (C) 2016, The PAC-ROM Project
-# This code has been modified. Portions copyright (C) 2016, The Pure Nexus Project
+# This code has been modified. Portions copyright (C) 2016, The Pure Experience Project
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ def push_as_commit(base_path, path, name, branch, username):
 
     # Create commit; if it fails, probably empty so skipping
     try:
-        repo.git.commit(m='PureNexus Automatic translation import')
+        repo.git.commit(m='Automatic translation import')
     except:
         print('Failed to create commit for %s, probably empty: skipping'
               % name, file=sys.stderr)
@@ -84,7 +84,7 @@ def push_as_commit(base_path, path, name, branch, username):
 
     # Push commit
     try:
-        repo.git.push('git@github.com:PureNexusProject-Legacy/%s' % (name),
+        repo.git.push('git@github.com:PureExperienceProject/%s' % (name),
                       'HEAD:%s' % branch)
         print('Successfully pushed commit for %s' % name)
     except:
@@ -110,16 +110,16 @@ def find_xml(base_path):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Synchronising PureNexus translations with Crowdin")
+        description="Synchronising translations with Crowdin")
     sync = parser.add_mutually_exclusive_group()
     parser.add_argument('-u', '--username', help='Git username',
                         required=True)
     parser.add_argument('-b', '--branch', help='Pure branch',
                         required=True)
     sync.add_argument('--no-upload', action='store_true',
-                      help='Only download PureNexus translations from Crowdin')
+                      help='Only download translations from Crowdin')
     sync.add_argument('--no-download', action='store_true',
-                      help='Only upload PureNexus source translations to Crowdin')
+                      help='Only upload source translations to Crowdin')
     return parser.parse_args()
 
 # ################################# PREPARE ################################## #
