@@ -31,7 +31,7 @@ reset=`tput sgr0`
 #functions
 release() {
   # Prepare build environment, sync the repo, and clean the out directory
-  export PURE_BUILD_TYPE=OFFICIAL
+  export ROM_BUILD_TYPE=OFFICIAL
   cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
@@ -42,7 +42,7 @@ release() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
@@ -59,7 +59,7 @@ INPUT_END
 
 testbuilds() {
   # Prepare build environment, sync the repo, and clean the out directory
-  export PURE_BUILD_TYPE=TEST
+  export ROM_BUILD_TYPE=TEST
   cd ${SOURCE}
   source build/envsetup.sh
   repo sync -j8
@@ -70,7 +70,7 @@ testbuilds() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/pure_nexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
 }
