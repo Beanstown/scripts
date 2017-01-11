@@ -1,8 +1,8 @@
 # crowdin-mm.yaml
 #
-# Crowdin configuration file for Pure
+# Crowdin configuration file for PureNexus
 #
-# Copyright (C) 2016 The Pure Experience Project
+# Copyright (C) 2016 The Pure PureNexus Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ project_identifier: the-purenexus-project
 preserve_hierarchy: true
 
 files:
-# Default for Pure
+# Default for PureNexus
   -
-    source:      '/**/values/pure_strings.xml'
+    source:      '/**/values/purenexus_strings.xml'
     translation: '/%original_path%-%android_code%/%original_file_name%'
     languages_mapping: &anchor
       android_code:
@@ -92,12 +92,12 @@ files:
         zu: zu
 
   -
-    source:      '/frameworks/base/packages/SystemUI/res/values/pure_arrays.xml'
+    source:      '/frameworks/base/packages/SystemUI/res/values/purenexus_arrays.xml'
     translation: '/%original_path%-%android_code%/%original_file_name%'
     languages_mapping: *anchor
 
   -
-    source:      '/packages/providers/DownloadProvider/res/values/pure_plurals.xml'
+    source:      '/packages/providers/DownloadProvider/res/values/purenexus_plurals.xml'
     translation: '/%original_path%-%android_code%/%original_file_name%'
     languages_mapping: *anchor
 

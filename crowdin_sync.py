@@ -3,11 +3,11 @@
 # crowdin_sync.py
 #
 # Updates Crowdin source translations and pushes translations
-# directly to Pure Experience Project Github.
+# directly to Pure Nexus Project Github.
 #
 # Copyright (C) 2014-2015 The CyanogenMod Project
 # This code has been modified. Portions copyright (C) 2016, The PAC-ROM Project
-# This code has been modified. Portions copyright (C) 2016, The Pure Experience Project
+# This code has been modified. Portions copyright (C) 2016, The Pure Nexus Project
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ def push_as_commit(base_path, path, name, branch, username):
 
     # Push commit
     try:
-        repo.git.push('git@github.com:PureExperienceProject/%s' % (name),
+        repo.git.push('git@github.com:PureNexusProject/%s' % (name),
                       'HEAD:%s' % branch)
         print('Successfully pushed commit for %s' % name)
     except:

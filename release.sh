@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2016 BeansTown106 for Pure Experience Project
+# Copyright (C) 2016 BeansTown106 for PureNexus Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ function release() {
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
-    mv ${SOURCE}/out/target/product/${DEVICE}/pure_${DEVICE}-*.zip ${OUTDIR}
+    mv ${SOURCE}/out/target/product/${DEVICE}/purenexus_${DEVICE}-*.zip ${OUTDIR}
     mka clean
   done
   

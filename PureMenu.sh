@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2016 BeansTown106 for Pure Experience Project
+# Copyright (C) 2016 BeansTown106 for PureNexus Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ release() {
   mka clean
   
   # Build the below devices 
-  DEVICES="angler bullhead shamu"
+  DEVICES="angler bullhead dragon marlin sailfish shamu"
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
@@ -67,7 +67,7 @@ testbuilds() {
   mka clean
   
   # Build the below devices 
-  DEVICES="angler bullhead shamu"
+  DEVICES="angler marlin shamu"
   for DEVICE in ${DEVICES}
   do
     brunch ${DEVICE}
@@ -86,7 +86,7 @@ echo "${red}==${reset}${green}       Lets get Ready To Build For The Masses!    
 echo "${red}=========================================================${reset}"
 echo "${red}==${reset}${yellow}   1 - Full Release and Upload                       ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   2 - Full Release without Upload                   ${reset}${red}==${reset}"
-echo "${red}==${reset}${yellow}   3 - Build 5X/N6/6P Test Builds                    ${reset}${red}==${reset}"
+echo "${red}==${reset}${yellow}   3 - Build Pixel XL/N6/6P Test Builds              ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   4 - Upload all files in Out Directory             ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   5 - Delete all files in Out Directory             ${reset}${red}==${reset}"
 echo "${red}==${reset}${yellow}   0 - Exit                                          ${reset}${red}==${reset}"
