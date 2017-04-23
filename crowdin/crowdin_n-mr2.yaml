@@ -2,7 +2,7 @@
 #
 # Crowdin configuration file for PureNexus
 #
-# Copyright (C) 2016 The Pure PureNexus Project
+# Copyright (C) 2017 The Pure PureNexus Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,14 +90,4 @@ files:
         uk: uk
         vi: vi
         zu: zu
-
-  -
-    source:      '/frameworks/base/packages/SystemUI/res/values/purenexus_arrays.xml'
-    translation: '/%original_path%-%android_code%/%original_file_name%'
-    languages_mapping: *anchor
-
-  -
-    source:      '/packages/providers/DownloadProvider/res/values/purenexus_plurals.xml'
-    translation: '/%original_path%-%android_code%/%original_file_name%'
-    languages_mapping: *anchor
 
